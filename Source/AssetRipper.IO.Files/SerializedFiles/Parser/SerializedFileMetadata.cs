@@ -95,7 +95,8 @@ namespace AssetRipper.IO.Files.SerializedFiles.Parser
 			if (HasSignature(reader.Generation))
 			{
 				string signature = reader.ReadStringZeroTerm();
-				UnityVersion = UnityVersion.Parse(signature);
+				string updated = signature.Split("-")[0];
+				UnityVersion = UnityVersion.Parse(updated);
 				reader.Version = UnityVersion;
 			}
 			if (HasPlatform(reader.Generation))

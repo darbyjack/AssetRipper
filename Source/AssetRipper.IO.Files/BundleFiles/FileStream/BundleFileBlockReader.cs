@@ -88,12 +88,15 @@ namespace AssetRipper.IO.Files.BundleFiles.FileStream
 								int bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
 								if (bytesWritten < 0)
 								{
-									EncryptedFileException.Throw(entry.PathFixed);
+									// EncryptedFileException.Throw(entry.PathFixed);
+									continue;
 								}
 								else if (bytesWritten != uncompressedSize)
 								{
-									DecompressionFailedException.ThrowIncorrectNumberBytesWritten(uncompressedSize, bytesWritten);
+									// DecompressionFailedException.ThrowIncorrectNumberBytesWritten(uncompressedSize, bytesWritten);
+									continue;
 								}
+						
 								new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
 								break;
 
